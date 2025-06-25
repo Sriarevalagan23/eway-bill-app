@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <style>
+        body { font-family: Arial; padding: 30px; }
+        .title { font-size: 24px; font-weight: bold; }
+        .subtext { font-size: 14px; }
+
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #ccc; padding: 8px; }
+        .blue { background-color: #d4edf8; font-weight: bold; }
+        .total-section { margin-top: 10px; text-align: right; }
+        .signature { margin-top: 80px; text-align: right; }
+
+        @media print {
+            .download {
+                display: none;
+            }
+        }
+
+        @media screen {
+            .download {
+                margin-top: 30px;
+                text-align: center;
+            }
+            .button {
+                padding: 10px 20px;
+                background: steelblue;
+                color: white;
+                text-decoration: none;
+                border-radius: 4px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header block using table layout -->
+   <div style="display: flex; justify-content: space-between; align-items: center;">
+    <div class="title">LEO PROFILES</div>
+    <div style="text-align: right;">
+        <h3 style="margin: 0;">PURCHASE ORDER</h3>
+    </div>
+</div>
+
+<hr style="margin: 8px 0; border: 1px solid black;">
+
+<!-- Address block under line -->
+<div class="subtext" style="font-size: 14px;">
+    878/2, Krishnagiri main road, Perugopanapalli Post, Krishnagiri District-635203 Tamilnadu<br>
+    GSTIN: 32AALFL2511N1ZA &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ph:9994674795 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Mail:leoprofiles2023@gmail.com
+</div>
+
+    <hr>
+
+    <!-- Customer and PO details -->
+    <div style="margin-top: 20px;">
+        <div style="float: left; width: 60%;">
+            <strong>Customer Details:</strong><br>
+            <strong>Jindal Aluminium Limited</strong><br>
+            Tumkur Rd, near Jindal Public School, Jindal Nagar,<br>
+            Anchepalaya, Bengaluru, Karnataka, 560073<br>
+            Ph: 08023715555
+        </div>
+        <div style="float: right; width: 35%;">
+            <strong>Purchase Order Details</strong><br>
+            No.: {{ data.po_no }}<br>
+            Date: {{ data.date }}
+        </div>
+        <div style="clear: both;"></div>
+    </div>
+
+    <!-- Bill Table -->
+    <table>
+        <tr class="blue">
+            <th>#</th>
+            <th>DESCRIPTION</th>
+            <th>QTY</th>
+            <th>PRICE</th>
+            <th>AMOUNT</th>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td><strong>{{ data.description }}</strong></td>
+            <td>{{ data.qty }} Kg</td>
+            <td>{{ data.price }}</td>
+            <td>₹ {{ "%.2f"|format(data.subtotal) }}</td>
+        </tr>
+    </table>
+
+    <!-- Totals -->
+    <div class="total-section">
+        <p>SUBTOTAL: ₹ {{ "%.2f"|format(data.subtotal) }}</p>
+        <p>@ 18% GST: ₹ {{ "%.2f"|format(data.gst) }}</p>
+        <p class="blue" style="display:inline-block; padding: 8px;">TOTAL: ₹ {{ "%.2f"|format(data.total) }}</p>
+        <p><strong>Total (In words):</strong> {{ data.total_words }} Only.</p>
+    </div>
+
+    <!-- Signature -->
+    <div class="signature">
+        For, <strong>LEO PROFILES</strong><br><br><br><br><br>
+        <small>AUTHORIZED SIGNATURE</small>
+    </div>
+
+    <!-- Download button (hidden in PDF) -->
+    <div class="download">
+        <a href="/download" class="button">Download PDF</a>
+    </div>
+
+</body>
+</html>
